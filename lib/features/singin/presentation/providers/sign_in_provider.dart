@@ -82,16 +82,13 @@ class SignInNotifier extends StateNotifier<SignInState> {
       final user = await _signIn(state.data);
       state = state.copyWith(authState: AsyncValue.data(user));
     } catch (error, stackTrace) {
-      final message = error.toString().replaceFirst('Exception: ', '');
+      final message = error is Exception
+          ? error.toString().replaceFirst('Exception: ', '')
+          : 'حدث خطأ أثناء تسجيل الدخول';
       state = state.copyWith(
         authState: AsyncValue.error(message, stackTrace),
-        passwordError: null,
       );
     }
-  }
-
-  void retry() {
-    state = state.copyWith(authState: const AsyncValue.data(null));
   }
 
   void reset() {
@@ -102,14 +99,14 @@ class SignInNotifier extends StateNotifier<SignInState> {
 class SignInState {
   final SignInData data;
   final bool obscurePassword;
-  final AsyncValue<AuthUser?> authState;
+  final AsyncValue<AuthUser> authState;
   final String? loginIdError;
   final String? passwordError;
 
   const SignInState({
     this.data = const SignInData(),
     this.obscurePassword = true,
-    this.authState = const AsyncValue.data(null),
+    this.authState = const AsyncValue.data(AuthUser(id: 0)),
     this.loginIdError,
     this.passwordError,
   });
@@ -117,12 +114,10 @@ class SignInState {
   bool get hasValidationErrors =>
       loginIdError != null || passwordError != null;
 
-  bool get isAuthLoading => authState.isLoading;
-
   SignInState copyWith({
     SignInData? data,
     bool? obscurePassword,
-    AsyncValue<AuthUser?>? authState,
+    AsyncValue<AuthUser>? authState,
     String? loginIdError,
     String? passwordError,
   }) {

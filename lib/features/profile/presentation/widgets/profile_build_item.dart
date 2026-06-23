@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
-import 'package:secretary_app/core/theme/theme_mode_provider.dart';
 
 import 'profile_menu_section.dart';
 
-class ProfileBuildItem extends ConsumerWidget {
+class ProfileBuildItem extends StatelessWidget {
   final MenuItem item;
   const ProfileBuildItem({super.key, required this.item});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
+  Widget build(BuildContext context) {
     final bgColor = item.type == MenuItemType.logout
         ? Theme.of(context).colorScheme.errorContainer
         : Theme.of(context).colorScheme.surfaceContainer;
@@ -56,16 +53,12 @@ class ProfileBuildItem extends ConsumerWidget {
               ),
               if (item.type == MenuItemType.darkMode)
                 Switch.adaptive(
-                  value: themeMode == ThemeMode.dark,
-                  onChanged: (_) =>
-                      ref.read(themeModeProvider.notifier).toggle(),
+                  value: false,
+                  onChanged: (_) => item.onTap?.call(),
                   activeTrackColor: Theme.of(context).colorScheme.primary,
-                  trackOutlineColor: WidgetStateProperty.all(
-                    Theme.of(context).colorScheme.surface,
-                  ),
+                  trackOutlineColor: WidgetStateProperty.all(Theme.of(context).colorScheme.surface),
                   inactiveThumbColor: Theme.of(context).colorScheme.surface,
-                  inactiveTrackColor:
-                      Theme.of(context).colorScheme.surfaceContainer,
+                  inactiveTrackColor: Theme.of(context).colorScheme.surfaceContainer,
                 )
               else
                 Icon(Icons.arrow_forward_ios, size: 18, color: iconColor),

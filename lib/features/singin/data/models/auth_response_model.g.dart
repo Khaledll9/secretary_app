@@ -37,67 +37,22 @@ Map<String, dynamic> _$AuthDataModelToJson(AuthDataModel instance) =>
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
   id: (json['id'] as num).toInt(),
-  name: json['name'] as String?,
+  nameAr: json['name_ar'] as String?,
+  nameEn: json['name_en'] as String?,
+  fullNameAr: json['full_name_ar'] as String?,
+  fullNameEn: json['full_name_en'] as String?,
   email: json['email'] as String?,
-  instituteId: (json['institute_id'] as num?)?.toInt(),
-  isActive: (json['is_active'] as num?)?.toInt(),
-  profile: json['profile'] == null
-      ? null
-      : ProfileModel.fromJson(json['profile'] as Map<String, dynamic>),
-  roles: (json['roles'] as List<dynamic>?)
-      ?.map((e) => RoleModel.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  type: json['type'] as String?,
+  phone: json['phone'] as String?,
 );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
   'id': instance.id,
-  'name': instance.name,
+  'name_ar': instance.nameAr,
+  'name_en': instance.nameEn,
+  'full_name_ar': instance.fullNameAr,
+  'full_name_en': instance.fullNameEn,
   'email': instance.email,
-  'institute_id': instance.instituteId,
-  'is_active': instance.isActive,
-  'profile': instance.profile,
-  'roles': instance.roles,
-};
-
-ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
-  id: (json['id'] as num).toInt(),
-  userId: (json['user_id'] as num?)?.toInt(),
-  code: json['code'] as String?,
-  fullNameAr: json['full_name_ar'] as String?,
-  fullNameEn: json['full_name_en'] as String?,
-  phoneNumber: json['phone_number'] as String?,
-  gender: json['gender'] as String?,
-  logo: json['logo'] as String?,
-  city: json['city'] as String?,
-  address: json['address'] as String?,
-  isActive: (json['is_active'] as num?)?.toInt(),
-  profileCompleted: (json['profile_completed'] as num?)?.toInt(),
-);
-
-Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'user_id': instance.userId,
-      'code': instance.code,
-      'full_name_ar': instance.fullNameAr,
-      'full_name_en': instance.fullNameEn,
-      'phone_number': instance.phoneNumber,
-      'gender': instance.gender,
-      'logo': instance.logo,
-      'city': instance.city,
-      'address': instance.address,
-      'is_active': instance.isActive,
-      'profile_completed': instance.profileCompleted,
-    };
-
-RoleModel _$RoleModelFromJson(Map<String, dynamic> json) => RoleModel(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String?,
-  guardName: json['guard_name'] as String?,
-);
-
-Map<String, dynamic> _$RoleModelToJson(RoleModel instance) => <String, dynamic>{
-  'id': instance.id,
-  'name': instance.name,
-  'guard_name': instance.guardName,
+  'type': instance.type,
+  'phone': instance.phone,
 };

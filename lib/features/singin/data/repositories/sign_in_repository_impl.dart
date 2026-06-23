@@ -1,6 +1,5 @@
 import '../../../../core/api/api_consumer.dart';
 import '../../../../core/api/end_points.dart';
-import '../../../../core/api/errors/exceptions.dart';
 import '../../../../core/api/token_manager.dart';
 import '../../domain/entities/sign_in_data.dart';
 import '../../domain/repositories/sign_in_repository.dart';
@@ -19,86 +18,35 @@ class SignInRepositoryImpl implements SignInRepository {
       password: data.password,
     );
 
-    try {
-      final response = await api.post(
-        EndPoint.login,
-        data: request.toJson(),
-      );
+    final response = await api.post(
+      EndPoint.login,
+      data: request.toJson(),
+    );
 
-      final authResponse =
-          AuthResponseModel.fromJson(response as Map<String, dynamic>);
+    final authResponse =
+        AuthResponseModel.fromJson(response as Map<String, dynamic>);
 
-      if (authResponse.status != true ||
-          authResponse.data == null ||
-          authResponse.data!.token == null ||
-          authResponse.data!.token!.isEmpty) {
-        throw Exception(_extractErrorMessage(authResponse));
-      }
-
-      TokenManager.setToken(authResponse.data!.token);
-
-      return _mapUser(authResponse.data!.user);
-    } on ServerException catch (e) {
-      throw Exception(
-        e.errModel.errorMessage.isNotEmpty
-            ? e.errModel.errorMessage
-            : 'حدث خطأ في الخادم',
-      );
-    } catch (e) {
-      if (e is Exception) rethrow;
-      throw Exception('حدث خطأ غير متوقع');
-    }
-  }
-
-  String _extractErrorMessage(AuthResponseModel response) {
-    if (response.message != null && response.message!.isNotEmpty) {
-      return _translateMessage(response.message!);
-    }
-    if (response.errors != null && response.errors!.isNotEmpty) {
-      final firstError = response.errors!.values.firstOrNull;
-      if (firstError is List && firstError.isNotEmpty) {
-        return firstError.first.toString();
-      }
-      if (firstError != null) return firstError.toString();
-    }
-    return 'فشل تسجيل الدخول';
-  }
-
-  String _translateMessage(String message) {
-    if (message == 'validation.custom.auth.login_success') {
-      return 'تم تسجيل الدخول بنجاح';
-    }
-    if (message.contains('login_failed') ||
-        message.contains('credentials') ||
-        message.contains('unauthorized') ||
-        message.contains('Invalid') ||
-        message.contains('login_id.invalid')) {
-      return 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
-    }
-    return message;
-  }
-
-  AuthUser _mapUser(UserModel? userData) {
-    if (userData == null) {
-      return const AuthUser(id: 0);
+    if (authResponse.status != true ||
+        authResponse.data == null ||
+        authResponse.data!.token == null) {
+      final errorMessage = authResponse.message ??
+          authResponse.errors?.values.expand((e) {
+            if (e is List) return e;
+            return [e.toString()];
+          }).firstOrNull ??
+          'فشل تسجيل الدخول';
+      throw Exception(errorMessage);
     }
 
-    final roleName =
-        userData.roles != null && userData.roles!.isNotEmpty
-            ? userData.roles![0].name
-            : null;
+    TokenManager.setToken(authResponse.data!.token);
 
-    final resolvedNameAr = userData.profile?.fullNameAr ?? userData.name;
-    final resolvedNameEn = userData.profile?.fullNameEn ?? userData.name;
-
+    final userData = authResponse.data!.user;
     return AuthUser(
-      id: userData.id,
-      name: userData.name,
-      nameAr: resolvedNameAr,
-      nameEn: resolvedNameEn,
-      email: userData.email,
-      role: roleName,
-      instituteId: userData.instituteId,
+      id: userData?.id ?? 0,
+      nameAr: userData?.nameAr,
+      nameEn: userData?.nameEn,
+      email: userData?.email,
+      type: userData?.type,
     );
   }
 }

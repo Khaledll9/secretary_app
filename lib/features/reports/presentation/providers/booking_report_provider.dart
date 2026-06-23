@@ -1,19 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
-import '../../../../core/api/api_provider.dart';
 import '../../data/repositories/reports_repository_impl.dart';
 import '../../domain/entities/reports_data.dart';
 import '../../domain/repositories/reports_repository.dart';
 import '../../domain/usecases/get_booking_report.dart';
 
-final bookingReportRepositoryProvider = Provider<ReportsRepository>((ref) {
-  final api = ref.watch(apiConsumerProvider);
-  return ReportsRepositoryImpl(api: api);
+final reportsRepositoryProvider = Provider<ReportsRepository>((ref) {
+  return const ReportsRepositoryImpl();
 });
 
 final getBookingReportUseCaseProvider = Provider<GetBookingReport>((ref) {
-  final repository = ref.watch(bookingReportRepositoryProvider);
+  final repository = ref.watch(reportsRepositoryProvider);
   return GetBookingReport(repository);
 });
 

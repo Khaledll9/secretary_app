@@ -1,15 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
-import '../../../../core/api/api_provider.dart';
 import '../../data/repositories/reports_repository_impl.dart';
 import '../../domain/entities/reports_data.dart';
 import '../../domain/repositories/reports_repository.dart';
 import '../../domain/usecases/get_reports_data.dart';
 
 final reportsRepositoryProvider = Provider<ReportsRepository>((ref) {
-  final api = ref.watch(apiConsumerProvider);
-  return ReportsRepositoryImpl(api: api);
+  return const ReportsRepositoryImpl();
 });
 
 final getReportsDataUseCaseProvider = Provider<GetReportsData>((ref) {
@@ -17,8 +15,7 @@ final getReportsDataUseCaseProvider = Provider<GetReportsData>((ref) {
   return GetReportsData(repository);
 });
 
-final reportsProvider =
-    StateNotifierProvider<ReportsNotifier, ReportsState>((ref) {
+final reportsProvider = StateNotifierProvider<ReportsNotifier, ReportsState>((ref) {
   final getReportsData = ref.watch(getReportsDataUseCaseProvider);
   return ReportsNotifier(getReportsData);
 });

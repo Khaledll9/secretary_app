@@ -9,10 +9,6 @@ class EndPoint {
   static String logout = "auth/logout";
   static String register = "auth/register";
 
-  // Reports
-  static String kpiReports = "reports/kpis";
-  static String topPerformers = "reports/top-performers";
-
   // Courses
   static String viewCourses = "view/courses";
   static String viewCourse(int id) => "view/courses/$id";

@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:secretary_app/core/widgets/main_wrapper.dart';
 import 'package:secretary_app/features/add_booking/presentation/screens/add_booking_screen.dart';
 import 'package:secretary_app/features/add_course/presentation/screens/add_course_screen.dart';
 import 'package:secretary_app/features/booking/presentation/screens/booking_details_screen.dart';
@@ -38,7 +39,7 @@ class AppRouter {
       GoRoute(
         name: AppRoutes.home,
         path: '/',
-        builder: (context, state) => const SignInScreen(),
+        builder: (context, state) => const MainWrapper(),
       ),
       GoRoute(
         name: AppRoutes.profile,

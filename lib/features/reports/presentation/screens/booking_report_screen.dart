@@ -129,25 +129,10 @@ class BookingReportScreen extends ConsumerWidget {
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (err, stack) => Center(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'حدث خطأ أثناء تحميل المحتوى',
-                    style: AppTextStyles.regular14.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () =>
-                        ref.read(bookingReportProvider.notifier).load(),
-                    child: const Text('إعادة المحاولة'),
-                  ),
-                ],
+            child: Text(
+              'حدث خطأ أثناء تحميل المحتوى',
+              style: AppTextStyles.regular14.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
           ),

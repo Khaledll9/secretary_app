@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/text_styles.dart';
-import '../../../../core/utils/app_routes.dart';
 import '../providers/sign_in_provider.dart';
 import '../widgets/sign_in_form_field.dart';
 
@@ -17,8 +15,8 @@ class SignInScreen extends ConsumerWidget {
     ref.listen<SignInState>(signInProvider, (prev, next) {
       next.authState.whenOrNull(
         data: (user) {
-          if (user != null) {
-            context.goNamed(AppRoutes.home);
+          if (user.id > 0) {
+            Navigator.of(context).pushReplacementNamed('/home');
           }
         },
         error: (message, _) {
@@ -121,16 +119,12 @@ class SignInScreen extends ConsumerWidget {
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                        onPressed: state.isAuthLoading
+                        onPressed: state.authState.isLoading
                             ? null
                             : () => ref.read(signInProvider.notifier).submit(),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
-                          disabledBackgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          disabledBackgroundColor: Theme.of(context).colorScheme.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -141,14 +135,14 @@ class SignInScreen extends ConsumerWidget {
                             16,
                           ),
                         ),
-                        child: state.isAuthLoading
-                            ? const SizedBox(
+                        child: state.authState.isLoading
+                            ? SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white,
+                                    Theme.of(context).colorScheme.surface,
                                   ),
                                 ),
                               )
