@@ -16,7 +16,7 @@ class StatCoursesCard extends StatelessWidget {
     return Container(
       height: 130,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(

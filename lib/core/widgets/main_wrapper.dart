@@ -33,9 +33,10 @@ class _AddMenuButton extends StatelessWidget {
         ),
       ),
       child: PopupMenuButton<String>(
+        padding: EdgeInsets.zero,
         icon: Icon(
           Icons.add_circle_outline,
-          color: Theme.of(context).colorScheme.onSurface,
+          color: Theme.of(context).colorScheme.surface,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 4,

@@ -79,7 +79,7 @@ class _FilterChipData extends ConsumerWidget {
         ? Theme.of(context).colorScheme.primary
         : Theme.of(context).colorScheme.surfaceContainerLowest;
     final textColor = isActive
-        ? Theme.of(context).colorScheme.surface
+        ? Theme.of(context).colorScheme.onPrimary
         : Theme.of(context).colorScheme.outline;
     final badgeColor = isActive
         ? Theme.of(context).colorScheme.surface.withValues(alpha: 0.2)
@@ -100,7 +100,7 @@ class _FilterChipData extends ConsumerWidget {
               label,
               style: (isActive
                   ? AppTextStyles.medium14.copyWith(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.onPrimary,
                     )
                   : AppTextStyles.medium14.copyWith(
                       color: Theme.of(context).colorScheme.outline,

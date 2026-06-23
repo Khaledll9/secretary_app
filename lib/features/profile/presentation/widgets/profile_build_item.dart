@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
+import 'package:secretary_app/core/theme/theme_mode_provider.dart';
 
 import 'profile_menu_section.dart';
 
-class ProfileBuildItem extends StatelessWidget {
+class ProfileBuildItem extends ConsumerWidget {
   final MenuItem item;
   const ProfileBuildItem({super.key, required this.item});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final bgColor = item.type == MenuItemType.logout
         ? Theme.of(context).colorScheme.errorContainer
         : Theme.of(context).colorScheme.surfaceContainer;
@@ -22,6 +24,14 @@ class ProfileBuildItem extends StatelessWidget {
         width: double.infinity,
         height: 64,
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
           onPressed: item.onTap,
           child: Row(
             children: [
@@ -53,7 +63,7 @@ class ProfileBuildItem extends StatelessWidget {
               ),
               if (item.type == MenuItemType.darkMode)
                 Switch.adaptive(
-                  value: false,
+                  value: ref.watch(themeModeProvider) == ThemeMode.dark,
                   onChanged: (_) => item.onTap?.call(),
                   activeTrackColor: Theme.of(context).colorScheme.primary,
                   trackOutlineColor: WidgetStateProperty.all(Theme.of(context).colorScheme.surface),
