@@ -22,7 +22,7 @@
 
 ## 1. The Problem & The Solution
 
-**Problem:** Educational institutes—particularly training centres and private academies—lack a unified, cross-platform system to manage course catalogues, handle student registrations, process bookings, and broadcast announcements. Most existing solutions are either fragmented across spreadsheets, limited to a single platform, or prohibitively expensive for small-to-medium institutes.
+**Problem:** Educational institutes particularly training centres and private academies lack a unified, cross-platform system to manage course catalogues, handle student registrations, process bookings, and broadcast announcements. Most existing solutions are either fragmented across spreadsheets, limited to a single platform, or prohibitively expensive for small-to-medium institutes.
 
 **Solution:** Yusur App is a cross-platform mobile application that provides institutes with a centralised course management and booking ecosystem. It decouples the presentation layer from the business domain through a layered architecture — enabling maintainable, testable, and scalable software delivery. The system is designed as a single-page application with declarative routing, reactive state management, and a functional error-handling pipeline.
 
