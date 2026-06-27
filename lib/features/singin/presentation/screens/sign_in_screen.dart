@@ -61,7 +61,7 @@ class SignInScreen extends ConsumerWidget {
                           ),
                         ),
                   color: Theme.of(context).colorScheme.surfaceContainerLow,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
               const SizedBox(height: 32),
