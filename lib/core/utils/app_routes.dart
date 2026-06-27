@@ -28,17 +28,17 @@ class AppRouter {
     routes: [
       GoRoute(
         name: AppRoutes.onBoarding,
-        path: '/onboarding',
+        path: '/',
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        name: AppRoutes.login,
-        path: '/login',
+        name: AppRoutes.singin,
+        path: '/sing-in',
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
-        name: AppRoutes.home,
-        path: '/',
+        name: AppRoutes.mainWrapper,
+        path: '/main-wrapper',
         builder: (context, state) => const MainWrapper(),
       ),
       GoRoute(
@@ -143,7 +143,8 @@ class AppRouter {
 
 class AppRoutes {
   static const String onBoarding = 'onBoarding';
-  static const String login = 'login';
+  static const String singin = 'singin';
+  static const String mainWrapper = 'mainWrapper';
   static const String home = 'home';
   static const String profile = 'profile';
   static const String bookings = 'bookings';

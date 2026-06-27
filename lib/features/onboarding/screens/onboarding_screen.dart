@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart' show GoRouterHelper;
 
+import '../../../core/utils/app_routes.dart';
 import '../data/onboarding_data.dart';
 import '../models/onboarding_model.dart';
 import '../widgets/onboarding_action_card.dart';
@@ -26,42 +28,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool get _isLastPage => _currentIndex == _items.length - 1;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_precached) {
-      _precached = true;
-      for (final item in _items) {
-        precacheImage(AssetImage(item.bgImage), context);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onNextPressed() {
-    if (_currentIndex < _items.length - 1) {
-      _controller.nextPage(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      widget.onComplete?.call();
-    }
-  }
-
-  void _onPageChanged(int index) {
-    setState(() => _currentIndex = index);
-  }
-
-  void _onSkipPressed() {
-    widget.onSkip?.call();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -84,7 +50,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     children: [
                       _SkipButton(
-                          visible: !_isLastPage, onPressed: _onSkipPressed),
+                        visible: !_isLastPage,
+                        onPressed: _onSkipPressed,
+                      ),
                       Expanded(
                         child: PageView.builder(
                           controller: _controller,
@@ -108,6 +76,42 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_precached) {
+      _precached = true;
+      for (final item in _items) {
+        precacheImage(AssetImage(item.bgImage), context);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onNextPressed() {
+    if (_currentIndex < _items.length - 1) {
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      context.goNamed(AppRoutes.singin);
+    }
+  }
+
+  void _onPageChanged(int index) {
+    setState(() => _currentIndex = index);
+  }
+
+  void _onSkipPressed() {
+    context.goNamed(AppRoutes.singin);
   }
 }
 

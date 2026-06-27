@@ -11,7 +11,6 @@ class AppTheme {
 
   static final ColorScheme lightColorScheme = ColorScheme.light(
     brightness: Brightness.light,
-
     primary: AppColors.primary,
     onPrimary: AppColors.white,
     primaryContainer: AppColors.primary50,
@@ -25,81 +24,65 @@ class AppTheme {
     onSecondary: AppColors.gradientStart,
     secondaryContainer: AppColors.primary50,
     onSecondaryContainer: AppColors.gradientEnd,
-
     tertiary: AppColors.green,
     onTertiary: AppColors.white,
     tertiaryContainer: AppColors.greenLite,
     onTertiaryContainer: AppColors.lightGreen,
-
     error: AppColors.red,
     onError: AppColors.white,
     errorContainer: AppColors.redLite,
-
     surface: AppColors.white,
-
     surfaceContainerLowest: const Color(0xFFF8FAFC),
     surfaceContainer: const Color(0xFFE5E7EA),
     surfaceContainerHigh: const Color(0xFFE5E7EA),
     surfaceContainerHighest: AppColors.border,
-
     surfaceBright: AppColors.lightAmber,
     surfaceDim: AppColors.amber,
-
     onSurface: AppColors.textPrimary,
     onSurfaceVariant: AppColors.textSecondary,
     onInverseSurface: AppColors.textTertiary,
-
     outline: AppColors.textLight,
     outlineVariant: AppColors.textMuted,
+    onTertiaryFixedVariant: AppColors.textMuted,
     shadow: AppColors.black,
     scrim: AppColors.black,
   );
 
   static final ColorScheme darkColorScheme = ColorScheme.dark(
     brightness: Brightness.dark,
-
     primary: const Color.fromARGB(255, 50, 79, 195),
     onPrimary: AppColors.white80,
     primaryContainer: AppColors.primary,
     onPrimaryContainer: const Color(0xFFE8ECFD),
     inversePrimary: AppColors.primary600,
     surfaceTint: const Color(0xFF9BAFFC),
-
     primaryFixed: const Color(0xFF334155),
     secondaryFixed: AppColors.purple,
     onSecondaryFixed: const Color(0xFFF3E8FF),
-
     secondary: const Color(0xFF1E293B),
-
     onSecondary: Color(0xFF1A365D),
     secondaryContainer: const Color(0xFF1E293B),
     onSecondaryContainer: Color(0xFF2A52BE),
-
     tertiary: const Color(0xFF34D399),
     onTertiary: const Color(0xFF064E3B),
     tertiaryContainer: const Color(0xFF064E3B),
     onTertiaryContainer: const Color(0xFFA7F3D0),
-
     error: const Color(0xFFFCA5A5),
     onError: const Color(0xFF7F1D1D),
     errorContainer: const Color(0xFF7F1D1D),
-
     surface: const Color(0xFF0F172A),
-
     surfaceContainerLowest: const Color(0xFF0B0F19),
     surfaceContainer: const Color(0xFF1E293B),
     surfaceContainerHigh: const Color(0xFF334155),
     surfaceContainerHighest: const Color(0xFF475569),
-
     surfaceBright: AppColors.amber,
     surfaceDim: const Color(0xFF78350F),
-
     onSurface: const Color(0xFFF8FAFC),
     onSurfaceVariant: const Color(0xFFCBD5E1),
     onInverseSurface: const Color(0xFF94A3B8),
-
     outline: AppColors.textTertiary,
     outlineVariant: const Color(0xFF334155),
+    onTertiaryFixedVariant: Color.fromARGB(255, 110, 127, 152),
     shadow: AppColors.black,
     scrim: AppColors.black,
   );

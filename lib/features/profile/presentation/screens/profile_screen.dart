@@ -80,7 +80,7 @@ class ProfileScreen extends ConsumerWidget {
                   icon: Icons.logout,
                   type: MenuItemType.logout,
                   onTap: () {
-                    context.goNamed(AppRoutes.login);
+                    context.goNamed(AppRoutes.singin);
                   },
                 ),
               ],

@@ -10,9 +10,7 @@ import 'generated/l10n.dart' show S;
 
 void main() {
   runApp(
-    ProviderScope(
-      child: DevicePreview(builder: (context) => const MyApp()),
-    ),
+    ProviderScope(child: DevicePreview(builder: (context) => const MyApp())),
   );
 }
 

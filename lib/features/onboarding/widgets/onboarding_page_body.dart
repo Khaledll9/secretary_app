@@ -13,7 +13,7 @@ class OnboardingPageBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(item.contentImage, height: 200),
+        Image.asset(item.contentImage, height: 180),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Text(

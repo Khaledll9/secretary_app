@@ -11,20 +11,24 @@ class CourseBottomBar extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _CourseActionButton(
-          text: '????????',
+          text: 'إحصائيات',
           icon: Icons.bar_chart_rounded,
           backgroundColor: Theme.of(context).colorScheme.primaryFixed,
           textColor: Theme.of(context).colorScheme.onPrimaryContainer,
-          textStyle: AppTextStyles.bold14.copyWith(color: Theme.of(context).colorScheme.primary),
+          textStyle: AppTextStyles.bold16.copyWith(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
           onTap: () {},
         ),
         const SizedBox(height: 12),
         _CourseActionButton(
-          text: '??? ??????',
+          text: 'حذف الدورة',
           icon: Icons.delete_outline_rounded,
           backgroundColor: Theme.of(context).colorScheme.errorContainer,
           textColor: Theme.of(context).colorScheme.error,
-          textStyle: AppTextStyles.medium16.copyWith(color: Theme.of(context).colorScheme.error),
+          textStyle: AppTextStyles.medium16.copyWith(
+            color: Theme.of(context).colorScheme.error,
+          ),
           onTap: () {},
         ),
       ],

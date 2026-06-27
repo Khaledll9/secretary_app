@@ -207,7 +207,9 @@ class _MainWrapperState extends State<MainWrapper>
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).colorScheme.primaryContainer
+              ? Theme.of(context).brightness == Brightness.light
+                    ? Theme.of(context).colorScheme.primaryContainer
+                    : Theme.of(context).colorScheme.onSecondary
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
@@ -240,7 +242,7 @@ class _MainWrapperState extends State<MainWrapper>
                 size: 22,
                 color: isSelected
                     ? Theme.of(context).colorScheme.onPrimary
-                    : Theme.of(context).colorScheme.outlineVariant,
+                    : Theme.of(context).colorScheme.onTertiaryFixedVariant,
               ),
             ),
             const SizedBox(height: 4),
@@ -249,7 +251,7 @@ class _MainWrapperState extends State<MainWrapper>
               style: AppTextStyles.bold12.copyWith(
                 color: isSelected
                     ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.outlineVariant,
+                    : Theme.of(context).colorScheme.onTertiaryFixedVariant,
               ),
             ),
           ],

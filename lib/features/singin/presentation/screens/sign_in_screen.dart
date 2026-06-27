@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:secretary_app/core/utils/app_routes.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../providers/sign_in_provider.dart';
 import '../widgets/sign_in_form_field.dart';
@@ -40,15 +43,25 @@ class SignInScreen extends ConsumerWidget {
                 width: 80,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceContainer,
+                  image: Theme.of(context).brightness == Brightness.light
+                      ? const DecorationImage(
+                          image: AssetImage('assets/images/app_icon_white.png'),
+                          fit: BoxFit.contain,
+                          colorFilter: ColorFilter.mode(
+                            AppColors.primary,
+                            BlendMode.srcIn,
+                          ),
+                        )
+                      : const DecorationImage(
+                          image: AssetImage('assets/images/app_icon_black.png'),
+                          fit: BoxFit.contain,
+                          colorFilter: ColorFilter.mode(
+                            AppColors.primary,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(12),
-                ),
-                child: Center(
-                  child: Icon(
-                    Icons.school,
-                    size: 40,
-                    color: Theme.of(context).colorScheme.outlineVariant,
-                  ),
                 ),
               ),
               const SizedBox(height: 32),
@@ -119,12 +132,17 @@ class SignInScreen extends ConsumerWidget {
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                        onPressed: state.authState.isLoading
-                            ? null
-                            : () => ref.read(signInProvider.notifier).submit(),
+                        onPressed: () => context.goNamed(AppRoutes.mainWrapper),
+                        //  state.authState.isLoading
+                        //     ? null
+                        //     : () => ref.read(signInProvider.notifier).submit(),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          disabledBackgroundColor: Theme.of(context).colorScheme.primary,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          disabledBackgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -149,7 +167,9 @@ class SignInScreen extends ConsumerWidget {
                             : Text(
                                 'تسجيل الدخول',
                                 style: AppTextStyles.bold16.copyWith(
-                                  color: Theme.of(context).colorScheme.surface,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
                                 ),
                               ),
                       ),

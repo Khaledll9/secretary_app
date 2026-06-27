@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart' show GoRouterHelper;
 
 import '../../../../core/theme/text_styles.dart';
-import '../../../../core/utils/app_routes.dart';
 import '../../../booking/domain/entities/booking_entity.dart';
 import '../../../booking/presentation/widgets/booking_card.dart';
 
@@ -48,33 +46,25 @@ class BookingRequestsSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            Row(
-              children: [
-                Icon(Icons.calendar_month, color: Theme.of(context).colorScheme.primary),
-                const SizedBox(width: 8.0),
-                Text('طلبات الحجز الجديدة', style: AppTextStyles.bold16),
-                const SizedBox(width: 8.0),
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Text(
-                    '5',
-                    style: AppTextStyles.bold12.copyWith(
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                  ),
-                ),
-              ],
+            Icon(
+              Icons.calendar_month,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            const Spacer(),
-            TextButton(
-              onPressed: () {
-                context.goNamed(AppRoutes.bookings);
-              },
-              child: Text('عرض الكل', style: AppTextStyles.bold12),
+            const SizedBox(width: 8.0),
+            Text('طلبات الحجز الجديدة', style: AppTextStyles.bold16),
+            const SizedBox(width: 8.0),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                '5',
+                style: AppTextStyles.bold12.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
             ),
           ],
         ),
