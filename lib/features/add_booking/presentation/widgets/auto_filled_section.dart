@@ -80,18 +80,9 @@ class AutoFilledSection extends StatelessWidget {
               return null;
             },
             items: const [
-              DropdownMenuItem(
-                value: 'حاسوب',
-                child: Text('حاسوب', textAlign: TextAlign.right),
-              ),
-              DropdownMenuItem(
-                value: 'لغات',
-                child: Text('لغات', textAlign: TextAlign.right),
-              ),
-              DropdownMenuItem(
-                value: 'هندسة',
-                child: Text('هندسة', textAlign: TextAlign.right),
-              ),
+              DropdownMenuItem(value: 'حاسوب', child: Text('حاسوب')),
+              DropdownMenuItem(value: 'لغات', child: Text('لغات')),
+              DropdownMenuItem(value: 'هندسة', child: Text('هندسة')),
             ],
           ),
           const SizedBox(height: 12),

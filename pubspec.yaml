@@ -83,11 +83,11 @@ flutter:
   fonts:
     - family: LamaSans
       fonts:
-        - asset: assets/test/LamaSans-Bold.otf
+        - asset: assets/texts/LamaSans-Bold.otf
           weight: 700
-        - asset: assets/test/LamaSans-Medium.otf
+        - asset: assets/texts/LamaSans-Medium.otf
           weight: 500
-        - asset: assets/test/LamaSans-Regular.otf
+        - asset: assets/texts/LamaSans-Regular.otf
           weight: 400
   #   - family: Trajan Pro
   #     fonts:

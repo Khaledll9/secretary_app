@@ -37,11 +37,15 @@ class _AddBookingScreenState extends ConsumerState<AddBookingScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('إضافة إعلان جديد', style: AppTextStyles.bold20),
+        title: Text(
+          'إضافة إعلان جديد',
+          style: AppTextStyles.bold20
+            ..copyWith(color: Theme.of(context).colorScheme.onSurface),
+        ),
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_forward,
-            color: Theme.of(context).colorScheme.outline,
+            Icons.arrow_back_ios_new,
+            color: Theme.of(context).colorScheme.onSurface,
             size: 16,
           ),
           onPressed: () => Navigator.of(context).maybePop(),
@@ -101,7 +105,11 @@ class _AddBookingScreenState extends ConsumerState<AddBookingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.check_circle, size: 64, color: Theme.of(context).colorScheme.tertiary),
+              Icon(
+                Icons.check_circle,
+                size: 64,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               const SizedBox(height: 16.0),
               Text('تم إضافة الإعلان بنجاح', style: AppTextStyles.bold20),
               const SizedBox(height: 12.0),

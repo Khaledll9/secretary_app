@@ -64,19 +64,19 @@ class AppDropdownField extends StatelessWidget {
                 color: Theme.of(context).colorScheme.error,
               ),
             ),
-            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-              16,
-              12,
-              16,
-              12,
+            contentPadding: const EdgeInsetsDirectional.symmetric(
+              vertical: 12,
+              horizontal: 16,
             ),
           ),
-          style: AppTextStyles.regular14,
+          style: AppTextStyles.medium14.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
           dropdownColor: Theme.of(context).colorScheme.surface,
           icon: Icon(
             Icons.keyboard_arrow_down,
             size: 18,
-            color: Theme.of(context).colorScheme.outline,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           items: items,
         ),

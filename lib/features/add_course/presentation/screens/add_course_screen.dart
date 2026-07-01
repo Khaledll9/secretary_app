@@ -39,10 +39,15 @@ class AddCourseScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           'إضافة دورة',
-          style: AppTextStyles.bold18.copyWith(color: Theme.of(context).colorScheme.onSurface),
+          style: AppTextStyles.bold18.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.onSurface),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
