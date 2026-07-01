@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:secretary_app/core/widgets/custom_search_filed.dart';
+import 'package:secretary_app/core/widgets/custom_search_field.dart';
 
 import '../../../../core/theme/text_styles.dart';
 import '../widgets/balance_card.dart';
@@ -27,7 +27,7 @@ class HomeScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 8),
-          CustomSearchFiled(
+          CustomSearchField(
             hintText: 'رقم الحجز مثال (1665)',
             icon: Icons.search,
           ),

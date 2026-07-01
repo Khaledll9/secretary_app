@@ -11,12 +11,12 @@ import 'package:secretary_app/features/my_courses/presentation/screens/for_booki
 import 'package:secretary_app/features/my_courses/presentation/screens/my_courses_screen.dart';
 import 'package:secretary_app/features/notifications/presentation/screens/add_notification_screen.dart';
 import 'package:secretary_app/features/notifications/presentation/screens/notification_screen.dart';
-import 'package:secretary_app/features/onboarding/screens/onboarding_screen.dart';
+import 'package:secretary_app/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:secretary_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:secretary_app/features/reports/presentation/screens/booking_report_screen.dart';
 import 'package:secretary_app/features/reports/presentation/screens/courses_reports_screen.dart';
 import 'package:secretary_app/features/reports/presentation/screens/reports_screen.dart';
-import 'package:secretary_app/features/singin/presentation/screens/sign_in_screen.dart';
+import 'package:secretary_app/features/signIn/presentation/screens/sign_in_screen.dart';
 
 import '../../features/institute/presentation/screens/institute_info_screen.dart';
 import '../../features/profile/presentation/screens/change_password_screen.dart';
@@ -32,8 +32,8 @@ class AppRouter {
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        name: AppRoutes.singin,
-        path: '/sing-in',
+        name: AppRoutes.signIn,
+        path: '/sign-in',
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
@@ -143,7 +143,7 @@ class AppRouter {
 
 class AppRoutes {
   static const String onBoarding = 'onBoarding';
-  static const String singin = 'singin';
+  static const String signIn = 'signIn';
   static const String mainWrapper = 'mainWrapper';
   static const String home = 'home';
   static const String profile = 'profile';

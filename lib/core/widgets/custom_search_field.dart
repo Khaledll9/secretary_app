@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
 
-class CustomSearchFiled extends StatelessWidget {
+class CustomSearchField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String>? onChanged;
-  const CustomSearchFiled({
+  const CustomSearchField({
     super.key,
     required this.hintText,
     required this.icon,
@@ -29,10 +29,16 @@ class CustomSearchFiled extends StatelessWidget {
           ),
           prefixIcon: Padding(
             padding: EdgeInsets.only(right: 12),
-            child: Icon(icon, color: Theme.of(context).colorScheme.outline, size: 20),
+            child: Icon(
+              icon,
+              color: Theme.of(context).colorScheme.outline,
+              size: 20,
+            ),
           ),
         ),
-        style: AppTextStyles.medium16.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+        style: AppTextStyles.medium16.copyWith(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
         onChanged: onChanged,
       ),
     );

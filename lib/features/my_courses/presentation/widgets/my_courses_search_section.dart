@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/custom_search_filed.dart';
+import '../../../../core/widgets/custom_search_field.dart';
 
 class MyCoursesSearchSection extends StatelessWidget {
   const MyCoursesSearchSection({super.key});
@@ -10,7 +10,7 @@ class MyCoursesSearchSection extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: CustomSearchFiled(
+          child: CustomSearchField(
             hintText: 'ابحث عن دورة او دبلوم...',
             icon: Icons.search,
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/text_styles.dart';
+import '../../../../core/theme/text_styles.dart';
 import 'onboarding_dot_indicator.dart';
 
 class OnboardingActionCard extends StatelessWidget {
@@ -55,7 +55,9 @@ class OnboardingActionCard extends StatelessWidget {
               onPressed: onNext,
               child: Text(
                 _isLastPage ? "دخول" : "التالي",
-                style: AppTextStyles.bold16.copyWith(color: Theme.of(context).colorScheme.surface),
+                style: AppTextStyles.bold16.copyWith(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
               ),
             ),
           ),

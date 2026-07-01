@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-class PrimaryBottom extends StatelessWidget {
+class PrimaryBotton extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onTap;
@@ -9,7 +8,7 @@ class PrimaryBottom extends StatelessWidget {
   final double height;
   final double elevation;
   final TextStyle textStyle;
-  const PrimaryBottom({
+  const PrimaryBotton({
     super.key,
     required this.title,
     required this.icon,
@@ -38,7 +37,12 @@ class PrimaryBottom extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (hasIcon) Icon(icon, size: 20, color: Theme.of(context).colorScheme.surface),
+            if (hasIcon)
+              Icon(
+                icon,
+                size: 20,
+                color: Theme.of(context).colorScheme.surface,
+              ),
             const SizedBox(width: 8),
             Text(title, style: textStyle),
           ],

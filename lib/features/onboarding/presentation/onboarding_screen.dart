@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' show GoRouterHelper;
 
 import '../../../core/utils/app_routes.dart';
+import '../data/models/onboarding_model.dart';
 import '../data/onboarding_data.dart';
-import '../models/onboarding_model.dart';
-import '../widgets/onboarding_action_card.dart';
-import '../widgets/onboarding_page_body.dart';
+import 'widgets/onboarding_action_card.dart';
+import 'widgets/onboarding_page_body.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final VoidCallback? onSkip;
@@ -102,7 +102,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.goNamed(AppRoutes.singin);
+      context.goNamed(AppRoutes.signIn);
     }
   }
 
@@ -111,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _onSkipPressed() {
-    context.goNamed(AppRoutes.singin);
+    context.goNamed(AppRoutes.signIn);
   }
 }
 

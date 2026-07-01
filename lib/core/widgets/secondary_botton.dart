@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../theme/text_styles.dart';
 
-class SecondBottom extends StatelessWidget {
+class SecondaryBotton extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onTap;
   final Color textColor;
   final Color backgroundColor;
-  const SecondBottom({
+  const SecondaryBotton({
     super.key,
     required this.title,
     required this.icon,

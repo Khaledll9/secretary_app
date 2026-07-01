@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/utils/app_routes.dart';
-import '../../../../core/widgets/primary_bottom.dart';
+import '../../../../core/widgets/primary_botton.dart';
 import '../../domain/entities/booking_entity.dart';
 
 class BookingActionCardRow extends StatelessWidget {
@@ -16,7 +16,7 @@ class BookingActionCardRow extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: PrimaryBottom(
+          child: PrimaryBotton(
             hasIcon: false,
             elevation: 1,
             title: 'تأكيد الحجز',

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
 
-import '../../../../core/widgets/primary_bottom.dart';
-import '../../../../core/widgets/second_bottom.dart';
+import '../../../../core/widgets/primary_botton.dart';
+import '../../../../core/widgets/secondary_botton.dart';
 import '../providers/confirm_attendance_provider.dart';
 import '../widgets/booking/course_details_section.dart';
 import '../widgets/booking/payment_breakdown_section.dart';
@@ -80,7 +80,11 @@ class ConfirmAttendanceScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.check_circle, size: 64, color: Theme.of(context).colorScheme.tertiary),
+              Icon(
+                Icons.check_circle,
+                size: 64,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               const SizedBox(height: 16.0),
               Text('تم تأكيد الحضور بنجاح', style: AppTextStyles.bold20),
             ],
@@ -127,7 +131,7 @@ class ConfirmAttendanceScreen extends ConsumerWidget {
                   totalPaid: attendance.totalPaid,
                 ),
                 const SizedBox(height: 24),
-                PrimaryBottom(
+                PrimaryBotton(
                   elevation: 2,
                   height: 56,
                   textStyle: AppTextStyles.bold16.copyWith(
@@ -138,7 +142,7 @@ class ConfirmAttendanceScreen extends ConsumerWidget {
                   onTap: () => notifier.confirmAttendance(),
                 ),
                 const SizedBox(height: 12),
-                SecondBottom(
+                SecondaryBotton(
                   title: 'إلغاء الحجز',
                   icon: Icons.cancel_outlined,
                   onTap: () => notifier.cancelBooking(),

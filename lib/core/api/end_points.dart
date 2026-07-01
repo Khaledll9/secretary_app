@@ -1,23 +1,3 @@
-class EndPoint {
-  static String baseUrl = "http://127.0.0.1:8000/api/v1/";
-  static String signIn = "user/signin";
-  static String signUp = "user/signup";
-  static String getUserDataEndPoint(int id) => "user/get-user/$id";
-
-  // Auth
-  static String login = "auth/login";
-  static String logout = "auth/logout";
-  static String register = "auth/register";
-
-  // Courses
-  static String viewCourses = "view/courses";
-  static String viewCourse(int id) => "view/courses/$id";
-  static String storeCourse = "courses";
-  static String updateCourse(int id) => "courses/update/$id";
-  static String toggleCourseStatus(int id) => "courses/toggle-status/$id";
-  static String destroyCourse(int id) => "courses/destroy/$id";
-}
-
 class ApiKey {
   // General
   static String status = "status";
@@ -68,4 +48,20 @@ class ApiKey {
   static String departmentId = "department_id";
   static String institute = "institute";
   static String createdBy = "created_by";
+}
+
+class EndPoint {
+  static String baseUrl = "http://127.0.0.1:8000/api/v1/";
+  // Auth
+  static String login = "auth/login";
+
+  // Courses
+  static String viewCourses = "view/courses";
+
+  static String storeCourse = "courses";
+  static String destroyCourse(int id) => "courses/destroy/$id";
+  static String getUserDataEndPoint(int id) => "user/get-user/$id";
+  static String toggleCourseStatus(int id) => "courses/toggle-status/$id";
+  static String updateCourse(int id) => "courses/update/$id";
+  static String viewCourse(int id) => "view/courses/$id";
 }

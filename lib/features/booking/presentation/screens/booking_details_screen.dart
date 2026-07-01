@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
 
-import '../../../../core/widgets/primary_bottom.dart';
-import '../../../../core/widgets/second_bottom.dart';
+import '../../../../core/widgets/primary_botton.dart';
+import '../../../../core/widgets/secondary_botton.dart';
 import '../providers/booking_details_provider.dart';
 import '../widgets/booking/info_cards_section.dart';
 import '../widgets/booking/payment_breakdown_section.dart';
@@ -28,7 +28,9 @@ class BookingDetailsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           'تفاصيل الحجز',
-          style: AppTextStyles.bold18.copyWith(color: Theme.of(context).colorScheme.onSurface),
+          style: AppTextStyles.bold18.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         leading: IconButton(
           icon: Icon(
@@ -45,16 +47,18 @@ class BookingDetailsScreen extends ConsumerWidget {
           children: [
             Expanded(child: _buildBody(context, state, ref)),
             const SizedBox(height: 24),
-            PrimaryBottom(
+            PrimaryBotton(
               height: 56,
               elevation: 2,
-              textStyle: AppTextStyles.bold16.copyWith(color: Theme.of(context).colorScheme.surface),
+              textStyle: AppTextStyles.bold16.copyWith(
+                color: Theme.of(context).colorScheme.surface,
+              ),
               title: 'تاكيد الحجز',
               icon: Icons.check_circle_outline_outlined,
               onTap: () => notifier.confirmAttendance(),
             ),
             const SizedBox(height: 12),
-            SecondBottom(
+            SecondaryBotton(
               title: 'إلغاء الحجز',
               icon: Icons.cancel_outlined,
               onTap: () => notifier.cancelBooking(),

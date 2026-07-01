@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/text_styles.dart';
-import '../models/onboarding_model.dart';
+import '../../../../core/theme/text_styles.dart';
+import '../../data/models/onboarding_model.dart';
 
 class OnboardingPageBody extends StatelessWidget {
   final OnboardingModel item;

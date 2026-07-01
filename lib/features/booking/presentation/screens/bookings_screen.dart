@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
 
-import '../../../../core/widgets/custom_search_filed.dart';
+import '../../../../core/widgets/custom_search_field.dart';
 import '../providers/booking_provider.dart';
 import '../widgets/booking_card.dart';
 import '../widgets/booking_filter_tabs.dart';
@@ -20,7 +20,7 @@ class BookingsScreen extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         children: [
-          const CustomSearchFiled(
+          const CustomSearchField(
             hintText: 'ابحث عن حجز أو دورة',
             icon: Icons.search,
           ),
