@@ -33,7 +33,7 @@ class MyCoursesFilterChips extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onFilterSelected(item.filter),
               child: Container(
-                padding: AppTheme.filterChipPadding,
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? Theme.of(context).colorScheme.primary

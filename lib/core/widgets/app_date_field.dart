@@ -15,13 +15,15 @@ class AppDateField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
           style: AppTextStyles.regular12.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 4),
@@ -30,10 +32,10 @@ class AppDateField extends StatelessWidget {
           child: Container(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                color: theme.colorScheme.surfaceContainerHigh,
               ),
             ),
             child: Row(
@@ -41,19 +43,19 @@ class AppDateField extends StatelessWidget {
                 Icon(
                   Icons.calendar_today,
                   size: 18,
-                  color: Theme.of(context).colorScheme.outline,
+                  color: theme.colorScheme.outline,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   selectedDate != null
                       ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
                       : 'dd/mm/yyyy',
                   style: selectedDate != null
                       ? AppTextStyles.regular14.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: theme.colorScheme.onSurface,
                         )
                       : AppTextStyles.regular14.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: theme.colorScheme.onSurfaceVariant,
                         ),
                 ),
               ],

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/text_styles.dart';
+import '../../../../core/widgets/app_dropdown_field.dart';
+import '../../../../core/widgets/app_form_field.dart';
+import '../../../../core/widgets/description_field.dart';
 import '../providers/add_course_provider.dart';
 
 class AddCourseForm extends ConsumerStatefulWidget {
@@ -21,19 +24,27 @@ class _AddCourseFormState extends ConsumerState<AddCourseForm> {
   Widget build(BuildContext context) {
     final state = ref.watch(addCourseProvider);
     final validation = state.validation;
+    final theme = Theme.of(context);
+
+    final fieldStyle = AppTextStyles.medium14.copyWith(
+      color: theme.colorScheme.onSurfaceVariant,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInputField(
+        AppFormField(
           label: 'عنوان الدورة',
           hint: 'مثال: مقدمة في برمجة بايثون',
           controller: _titleController,
           errorText: validation?.titleArError,
           onChanged: (v) => ref.read(addCourseProvider.notifier).setTitleAr(v),
+          fillColor: theme.colorScheme.surface,
+          labelStyle: fieldStyle,
+          hintStyle: AppTextStyles.regular16,
         ),
         const SizedBox(height: 20),
-        _buildDropdownField(
+        AppDropdownField(
           label: 'تصنيف الدورة',
           hint: 'اختر القسم',
           value: state.departmentId > 0 ? state.departmentId : null,
@@ -43,30 +54,35 @@ class _AddCourseFormState extends ConsumerState<AddCourseForm> {
             }
           },
           errorText: validation?.departmentIdError,
+          items: const [
+            DropdownMenuItem(value: 1, child: Text('برمجة')),
+            DropdownMenuItem(value: 2, child: Text('تصميم')),
+            DropdownMenuItem(value: 3, child: Text('تسويق')),
+            DropdownMenuItem(value: 4, child: Text('إدارة')),
+          ],
         ),
         const SizedBox(height: 20),
-        _buildInputField(
-          label: 'الوصف',
-          hint: 'اكتب وصفاً مختصراً لمحتوى الدورة...',
-          maxLines: 4,
-          height: 120,
+        DescriptionField(
           controller: _descriptionController,
           onChanged: (v) =>
               ref.read(addCourseProvider.notifier).setDescriptionAr(v),
         ),
         const SizedBox(height: 20),
-        _buildInputField(
+        AppFormField(
           label: 'اسم الكورس',
           hint: 'مثال: AI',
           controller: null,
           errorText: validation?.nameArError,
           onChanged: (v) => ref.read(addCourseProvider.notifier).setNameAr(v),
+          fillColor: theme.colorScheme.surface,
+          labelStyle: fieldStyle,
+          hintStyle: AppTextStyles.regular16,
         ),
         const SizedBox(height: 20),
         Row(
           children: [
             Expanded(
-              child: _buildInputField(
+              child: AppFormField(
                 label: 'المدة الزمنية',
                 hint: 'مثال: 4 أسابيع',
                 suffixIcon: Icons.calendar_today_outlined,
@@ -74,11 +90,14 @@ class _AddCourseFormState extends ConsumerState<AddCourseForm> {
                 errorText: validation?.durationError,
                 onChanged: (v) =>
                     ref.read(addCourseProvider.notifier).setDuration(v),
+                fillColor: theme.colorScheme.surface,
+                labelStyle: fieldStyle,
+                hintStyle: AppTextStyles.regular16,
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: _buildInputField(
+              child: AppFormField(
                 label: 'السعر',
                 hint: '0',
                 suffixIcon: Icons.attach_money,
@@ -86,6 +105,9 @@ class _AddCourseFormState extends ConsumerState<AddCourseForm> {
                 errorText: validation?.priceError,
                 onChanged: (v) =>
                     ref.read(addCourseProvider.notifier).setPrice(v),
+                fillColor: theme.colorScheme.surface,
+                labelStyle: fieldStyle,
+                hintStyle: AppTextStyles.regular16,
               ),
             ),
           ],
@@ -94,24 +116,30 @@ class _AddCourseFormState extends ConsumerState<AddCourseForm> {
         Row(
           children: [
             Expanded(
-              child: _buildInputField(
+              child: AppFormField(
                 label: 'تاريخ البداية',
                 hint: 'YYYY-MM-DD',
                 controller: null,
                 errorText: validation?.startDateError,
                 onChanged: (v) =>
                     ref.read(addCourseProvider.notifier).setStartDate(v),
+                fillColor: theme.colorScheme.surface,
+                labelStyle: fieldStyle,
+                hintStyle: AppTextStyles.regular16,
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: _buildInputField(
+              child: AppFormField(
                 label: 'تاريخ النهاية',
                 hint: 'YYYY-MM-DD',
                 controller: null,
                 errorText: validation?.endDateError,
                 onChanged: (v) =>
                     ref.read(addCourseProvider.notifier).setEndDate(v),
+                fillColor: theme.colorScheme.surface,
+                labelStyle: fieldStyle,
+                hintStyle: AppTextStyles.regular16,
               ),
             ),
           ],
@@ -136,153 +164,5 @@ class _AddCourseFormState extends ConsumerState<AddCourseForm> {
     _descriptionController = TextEditingController();
     _durationController = TextEditingController();
     _priceController = TextEditingController();
-  }
-
-  Widget _buildDropdownField({
-    required String label,
-    required String hint,
-    int? value,
-    required ValueChanged<int?> onChanged,
-    String? errorText,
-  }) {
-    final hasError = errorText != null;
-
-    final departments = [
-      {'id': 1, 'name': 'برمجة'},
-      {'id': 2, 'name': 'تصميم'},
-      {'id': 3, 'name': 'تسويق'},
-      {'id': 4, 'name': 'إدارة'},
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: AppTextStyles.medium14.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: hasError
-                  ? Theme.of(context).colorScheme.error
-                  : Theme.of(context).colorScheme.surfaceContainer,
-            ),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<int>(
-              value: value,
-              hint: Text(hint, style: AppTextStyles.medium16),
-              isExpanded: true,
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              items: departments.map((dept) {
-                return DropdownMenuItem<int>(
-                  value: dept['id'] as int,
-                  child: Text(
-                    dept['name'] as String,
-                    style: AppTextStyles.medium16,
-                  ),
-                );
-              }).toList(),
-              onChanged: onChanged,
-            ),
-          ),
-        ),
-        if (hasError) ...[
-          const SizedBox(height: 4),
-          Text(
-            errorText,
-            style: AppTextStyles.medium16
-                .copyWith(color: Theme.of(context).colorScheme.error)
-                .copyWith(fontSize: 12),
-          ),
-        ],
-      ],
-    );
-  }
-
-  Widget _buildInputField({
-    required String label,
-    required String hint,
-    int maxLines = 1,
-    double? height,
-    IconData? suffixIcon,
-    TextEditingController? controller,
-    String? errorText,
-    required ValueChanged<String> onChanged,
-  }) {
-    final hasError = errorText != null;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: AppTextStyles.medium14.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 8),
-        SizedBox(
-          height: height,
-          child: TextFormField(
-            controller: controller,
-            maxLines: maxLines,
-            onChanged: onChanged,
-            decoration: InputDecoration(
-              hintText: hint,
-              hintStyle: AppTextStyles.regular16,
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.surface,
-              suffixIcon: suffixIcon != null
-                  ? Icon(
-                      suffixIcon,
-                      color: Theme.of(context).colorScheme.outline,
-                      size: 20,
-                    )
-                  : null,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: hasError
-                      ? Theme.of(context).colorScheme.error
-                      : Theme.of(context).colorScheme.surfaceContainer,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: hasError
-                      ? Theme.of(context).colorScheme.error
-                      : Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-          ),
-        ),
-        if (hasError) ...[
-          const SizedBox(height: 4),
-          Text(
-            errorText,
-            style: AppTextStyles.medium16
-                .copyWith(color: Theme.of(context).colorScheme.error)
-                .copyWith(fontSize: 12),
-          ),
-        ],
-      ],
-    );
   }
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
 
-class AppDropdownField extends StatelessWidget {
+class AppDropdownField<T> extends StatelessWidget {
   final String label;
-  final String? value;
-  final ValueChanged<String?>? onChanged;
-  final FormFieldValidator<String>? validator;
-  final List<DropdownMenuItem<String>> items;
+  final T? value;
+  final ValueChanged<T?>? onChanged;
+  final FormFieldValidator<T>? validator;
+  final List<DropdownMenuItem<T>> items;
+  final String? errorText;
+  final String? hint;
 
   const AppDropdownField({
     super.key,
@@ -15,54 +17,60 @@ class AppDropdownField extends StatelessWidget {
     this.onChanged,
     this.validator,
     required this.items,
+    this.errorText,
+    this.hint,
   });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final hasError = errorText != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
           style: AppTextStyles.regular12.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: theme.colorScheme.onSurface,
           ),
         ),
-        SizedBox(height: 4),
-        DropdownButtonFormField<String>(
+        const SizedBox(height: 4),
+        DropdownButtonFormField<T>(
           initialValue: value,
           onChanged: onChanged,
           validator: validator,
           isExpanded: true,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: hint,
             filled: true,
-            fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+            fillColor: theme.colorScheme.surfaceContainerLowest,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
+              borderSide: hasError
+                  ? BorderSide(color: theme.colorScheme.error)
+                  : BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
+              borderSide: hasError
+                  ? BorderSide(color: theme.colorScheme.error)
+                  : BorderSide.none,
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
+                color: hasError ? theme.colorScheme.error : theme.colorScheme.primary,
               ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.error,
-              ),
+              borderSide: BorderSide(color: theme.colorScheme.error),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.error,
-              ),
+              borderSide: BorderSide(color: theme.colorScheme.error),
             ),
             contentPadding: const EdgeInsetsDirectional.symmetric(
               vertical: 12,
@@ -70,16 +78,23 @@ class AppDropdownField extends StatelessWidget {
             ),
           ),
           style: AppTextStyles.medium14.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: theme.colorScheme.onSurface,
           ),
-          dropdownColor: Theme.of(context).colorScheme.surface,
+          dropdownColor: theme.colorScheme.surface,
           icon: Icon(
             Icons.keyboard_arrow_down,
             size: 18,
-            color: Theme.of(context).colorScheme.onSurface,
+            color: theme.colorScheme.onSurface,
           ),
           items: items,
         ),
+        if (hasError) ...[
+          const SizedBox(height: 4),
+          Text(
+            errorText!,
+            style: TextStyle(fontSize: 12, color: theme.colorScheme.error),
+          ),
+        ],
       ],
     );
   }

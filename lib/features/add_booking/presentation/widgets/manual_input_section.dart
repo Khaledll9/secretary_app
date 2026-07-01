@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
-
-import 'app_date_field.dart';
-import 'app_form_field.dart';
+import 'package:secretary_app/core/widgets/app_date_field.dart';
+import 'package:secretary_app/core/widgets/app_form_field.dart';
 
 class ManualInputSection extends StatelessWidget {
   final TextEditingController? durationController;

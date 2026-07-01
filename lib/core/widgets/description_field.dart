@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/theme/text_styles.dart';
+import 'package:secretary_app/core/theme/text_styles.dart';
 
 class DescriptionField extends StatelessWidget {
   final TextEditingController? controller;
@@ -10,13 +9,14 @@ class DescriptionField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
           'الوصف',
           style: AppTextStyles.medium14.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
+            color: theme.colorScheme.onSurface,
           ),
           textAlign: TextAlign.right,
         ),
@@ -31,26 +31,23 @@ class DescriptionField extends StatelessWidget {
             hintText: 'اكتب وصفاً مختصراً لمحتوى الدورة...',
             hintStyle: AppTextStyles.regular16,
             filled: true,
-            fillColor: Theme.of(context).colorScheme.surface,
+            fillColor: theme.colorScheme.surface,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.surfaceContainer,
-              ),
+              borderSide: BorderSide(color: theme.colorScheme.surfaceContainer),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.surfaceContainer,
-              ),
+              borderSide: BorderSide(color: theme.colorScheme.surfaceContainer),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              borderSide: BorderSide(color: theme.colorScheme.primary),
             ),
-            contentPadding: const EdgeInsets.fromLTRB(16, 12, 16, 84),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
           ),
           style: AppTextStyles.regular16,
         ),

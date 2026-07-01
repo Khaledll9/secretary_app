@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secretary_app/core/theme/text_styles.dart';
-
-import 'app_dropdown_field.dart';
-import 'app_form_field.dart';
+import 'package:secretary_app/core/widgets/app_dropdown_field.dart';
+import 'package:secretary_app/core/widgets/app_form_field.dart';
 
 class AutoFilledSection extends StatelessWidget {
   final TextEditingController? courseNameController;
@@ -71,6 +70,7 @@ class AutoFilledSection extends StatelessWidget {
           const SizedBox(height: 12),
           AppDropdownField(
             label: 'القسم',
+            hint: 'اختر القسم',
             value: departmentController?.text.isEmpty == true
                 ? null
                 : departmentController?.text,

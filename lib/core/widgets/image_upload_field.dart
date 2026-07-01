@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/theme/text_styles.dart';
-import 'dashed_border_painter.dart';
+import 'package:secretary_app/core/theme/text_styles.dart';
+import 'package:secretary_app/core/widgets/dashed_border_painter.dart';
 
 class ImageUploadField extends StatelessWidget {
   final VoidCallback? onTap;
@@ -10,17 +9,19 @@ class ImageUploadField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         height: 160,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
         ),
         child: CustomPaint(
           painter: DashedBorderPainter(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: theme.colorScheme.primaryContainer,
             strokeWidth: 2,
             dashLength: 6,
             gapLength: 4,
@@ -33,20 +34,20 @@ class ImageUploadField extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Icon(
                     Icons.cloud_upload_outlined,
                     size: 18,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: theme.colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'تحميل صورة الدورة',
                   style: AppTextStyles.bold18.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: theme.colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 4),
