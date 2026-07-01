@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart' show GoRouterHelper;
 
+import '../../../../core/api/token_manager.dart';
+import '../../../../core/storage/local_storage.dart';
 import '../../../../core/theme/text_styles.dart';
 import '../../../../core/theme/theme_mode_provider.dart';
 import '../../../../core/utils/app_routes.dart';
@@ -79,8 +81,13 @@ class ProfileScreen extends ConsumerWidget {
                   title: 'تسجيل الخروج',
                   icon: Icons.logout,
                   type: MenuItemType.logout,
-                  onTap: () {
-                    context.goNamed(AppRoutes.signIn);
+                  onTap: () async {
+                    TokenManager.clear();
+                    await LocalStorage.clear();
+                    ref.invalidate(profileProvider);
+                    if (context.mounted) {
+                      context.goNamed(AppRoutes.signIn);
+                    }
                   },
                 ),
               ],

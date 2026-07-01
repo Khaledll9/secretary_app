@@ -36,30 +36,31 @@ class AuthDataModel {
 }
 
 @JsonSerializable()
+class RoleModel {
+  final String name;
+
+  const RoleModel({required this.name});
+
+  factory RoleModel.fromJson(Map<String, dynamic> json) =>
+      _$RoleModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RoleModelToJson(this);
+}
+
+@JsonSerializable()
 class UserModel {
   final int id;
-  @JsonKey(name: 'name_ar')
-  final String? nameAr;
-  @JsonKey(name: 'name_en')
-  final String? nameEn;
-  @JsonKey(name: 'full_name_ar')
-  final String? fullNameAr;
-  @JsonKey(name: 'full_name_en')
-  final String? fullNameEn;
-  final String? email;
-  final String? type;
-  @JsonKey(name: 'phone')
-  final String? phone;
+  final String name;
+  final List<RoleModel>? roles;
+
+  @JsonKey(name: 'institute_id')
+  final int? instituteId;
 
   const UserModel({
     required this.id,
-    this.nameAr,
-    this.nameEn,
-    this.fullNameAr,
-    this.fullNameEn,
-    this.email,
-    this.type,
-    this.phone,
+    required this.name,
+    this.roles,
+    this.instituteId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

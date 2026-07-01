@@ -31,7 +31,12 @@ class SignInFormField extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(4, 4, 4, 0),
-          child: Text(label, style: AppTextStyles.medium14.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant)),
+          child: Text(
+            label,
+            style: AppTextStyles.medium14.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
         ),
         const SizedBox(height: 8),
         Container(
@@ -41,12 +46,19 @@ class SignInFormField extends StatelessWidget {
             color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(12),
             border: hasError
-                ? Border.all(color: Theme.of(context).colorScheme.error, width: 1)
+                ? Border.all(
+                    color: Theme.of(context).colorScheme.error,
+                    width: 1,
+                  )
                 : null,
           ),
           child: Row(
             children: [
-              Icon(prefixIcon, size: 20, color: Theme.of(context).colorScheme.outline),
+              Icon(
+                prefixIcon,
+                size: 20,
+                color: Theme.of(context).colorScheme.outline,
+              ),
               const SizedBox(width: 16),
               Expanded(
                 child: TextField(
@@ -65,6 +77,17 @@ class SignInFormField extends StatelessWidget {
             ],
           ),
         ),
+        if (hasError)
+          Padding(
+            padding: const EdgeInsetsDirectional.only(top: 4),
+            child: Text(
+              errorText!,
+              style: AppTextStyles.medium16.copyWith(
+                color: Theme.of(context).colorScheme.error,
+                fontSize: 12,
+              ),
+            ),
+          ),
       ],
     );
   }

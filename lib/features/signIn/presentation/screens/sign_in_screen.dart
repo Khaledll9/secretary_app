@@ -18,8 +18,8 @@ class SignInScreen extends ConsumerWidget {
     ref.listen<SignInState>(signInProvider, (prev, next) {
       next.authState.whenOrNull(
         data: (user) {
-          if (user.id > 0) {
-            Navigator.of(context).pushReplacementNamed('/home');
+          if (user != null) {
+            context.goNamed(AppRoutes.mainWrapper);
           }
         },
         error: (message, _) {
@@ -39,31 +39,7 @@ class SignInScreen extends ConsumerWidget {
           child: Column(
             children: [
               const SizedBox(height: 25),
-              Container(
-                width: 80,
-                height: 60,
-                decoration: BoxDecoration(
-                  image: Theme.of(context).brightness == Brightness.light
-                      ? const DecorationImage(
-                          image: AssetImage('assets/images/app_icon_white.png'),
-                          fit: BoxFit.contain,
-                          colorFilter: ColorFilter.mode(
-                            AppColors.primary,
-                            BlendMode.srcIn,
-                          ),
-                        )
-                      : const DecorationImage(
-                          image: AssetImage('assets/images/app_icon_black.png'),
-                          fit: BoxFit.contain,
-                          colorFilter: ColorFilter.mode(
-                            AppColors.primary,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                  color: Theme.of(context).colorScheme.surfaceContainerLow,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
+              const _Logo(),
               const SizedBox(height: 32),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
@@ -78,18 +54,8 @@ class SignInScreen extends ConsumerWidget {
                       prefixIcon: Icons.email_outlined,
                       errorText: state.loginIdError,
                       onChanged: (v) =>
-                          ref.read(signInProvider.notifier).setEmail(v),
+                          ref.read(signInProvider.notifier).setLoginId(v),
                     ),
-                    if (state.loginIdError != null) ...[
-                      const SizedBox(height: 4.0),
-                      Text(
-                        state.loginIdError!,
-                        style: AppTextStyles.medium16.copyWith(
-                          color: Theme.of(context).colorScheme.error,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
                     const SizedBox(height: 16),
                     SignInFormField(
                       label: 'كلمة المرور',
@@ -117,41 +83,21 @@ class SignInScreen extends ConsumerWidget {
                       onChanged: (v) =>
                           ref.read(signInProvider.notifier).setPassword(v),
                     ),
-                    if (state.passwordError != null) ...[
-                      const SizedBox(height: 4.0),
-                      Text(
-                        state.passwordError!,
-                        style: AppTextStyles.medium16.copyWith(
-                          color: Theme.of(context).colorScheme.error,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
                     const SizedBox(height: 32),
                     SizedBox(
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                        onPressed: () => context.goNamed(AppRoutes.mainWrapper),
-                        //  state.authState.isLoading
-                        //     ? null
-                        //     : () => ref.read(signInProvider.notifier).submit(),
+                        onPressed: state.authState.isLoading
+                            ? null
+                            : () => ref.read(signInProvider.notifier).submit(),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
-                          disabledBackgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          disabledBackgroundColor: Theme.of(context).colorScheme.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                            103,
-                            16,
-                            103,
-                            16,
-                          ),
+                          padding: const EdgeInsetsDirectional.fromSTEB(103, 16, 103, 16),
                         ),
                         child: state.authState.isLoading
                             ? SizedBox(
@@ -167,9 +113,7 @@ class SignInScreen extends ConsumerWidget {
                             : Text(
                                 'تسجيل الدخول',
                                 style: AppTextStyles.bold16.copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onPrimary,
+                                  color: Theme.of(context).colorScheme.onPrimary,
                                 ),
                               ),
                       ),
@@ -178,27 +122,62 @@ class SignInScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('ليس لديك حساب؟', style: AppTextStyles.regular16),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      'قم بإنشاء حساب',
-                      style: AppTextStyles.bold16.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              const _SignUpRow(),
               const SizedBox(height: 24),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Logo extends StatelessWidget {
+  const _Logo();
+
+  @override
+  Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
+    return Container(
+      width: 80,
+      height: 60,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            isLight
+                ? 'assets/images/app_icon_white.png'
+                : 'assets/images/app_icon_black.png',
+          ),
+          fit: BoxFit.contain,
+          colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
+        ),
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(8),
+      ),
+    );
+  }
+}
+
+class _SignUpRow extends StatelessWidget {
+  const _SignUpRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('ليس لديك حساب؟', style: AppTextStyles.regular16),
+        const SizedBox(width: 8),
+        GestureDetector(
+          onTap: () {},
+          child: Text(
+            'قم بإنشاء حساب',
+            style: AppTextStyles.bold16.copyWith(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

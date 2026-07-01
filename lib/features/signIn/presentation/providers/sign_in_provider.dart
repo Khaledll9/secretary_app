@@ -7,6 +7,11 @@ import '../../domain/entities/sign_in_data.dart';
 import '../../domain/repositories/sign_in_repository.dart';
 import '../../domain/usecases/sign_in.dart';
 
+final signInProvider = StateNotifierProvider<SignInNotifier, SignInState>((ref) {
+  final signIn = ref.watch(signInUseCaseProvider);
+  return SignInNotifier(signIn);
+});
+
 final signInRepositoryProvider = Provider<SignInRepository>((ref) {
   final api = ref.watch(apiConsumerProvider);
   return SignInRepositoryImpl(api: api);
@@ -17,20 +22,14 @@ final signInUseCaseProvider = Provider<SignIn>((ref) {
   return SignIn(repository);
 });
 
-final signInProvider =
-    StateNotifierProvider<SignInNotifier, SignInState>((ref) {
-  final signIn = ref.watch(signInUseCaseProvider);
-  return SignInNotifier(signIn);
-});
-
 class SignInNotifier extends StateNotifier<SignInState> {
   final SignIn _signIn;
 
   SignInNotifier(this._signIn) : super(const SignInState());
 
-  void setEmail(String value) {
+  void setLoginId(String value) {
     state = state.copyWith(
-      data: state.data.copyWith(loginId: value),
+      data: state.data.copyWith(loginId: value.trim()),
       loginIdError: null,
     );
   }
@@ -40,6 +39,22 @@ class SignInNotifier extends StateNotifier<SignInState> {
       data: state.data.copyWith(password: password),
       passwordError: null,
     );
+  }
+
+  Future<void> submit() async {
+    if (!_validate()) return;
+
+    state = state.copyWith(authState: const AsyncValue.loading());
+
+    try {
+      final user = await _signIn(state.data);
+      state = state.copyWith(authState: AsyncValue.data(user));
+    } catch (error, stackTrace) {
+      final message = error is Exception
+          ? error.toString().replaceFirst('Exception: ', '')
+          : 'حدث خطأ أثناء تسجيل الدخول';
+      state = state.copyWith(authState: AsyncValue.error(message, stackTrace));
+    }
   }
 
   void togglePasswordVisibility() {
@@ -64,60 +79,33 @@ class SignInNotifier extends StateNotifier<SignInState> {
       state = state.copyWith(passwordError: 'كلمة المرور مطلوبة');
       valid = false;
     } else if (password.length < 6) {
-      state = state.copyWith(
-        passwordError: 'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
-      );
+      state = state.copyWith(passwordError: 'كلمة المرور يجب أن تكون 6 أحرف على الأقل');
       valid = false;
     }
 
     return valid;
-  }
-
-  Future<void> submit() async {
-    if (!_validate()) return;
-
-    state = state.copyWith(authState: const AsyncValue.loading());
-
-    try {
-      final user = await _signIn(state.data);
-      state = state.copyWith(authState: AsyncValue.data(user));
-    } catch (error, stackTrace) {
-      final message = error is Exception
-          ? error.toString().replaceFirst('Exception: ', '')
-          : 'حدث خطأ أثناء تسجيل الدخول';
-      state = state.copyWith(
-        authState: AsyncValue.error(message, stackTrace),
-      );
-    }
-  }
-
-  void reset() {
-    state = const SignInState();
   }
 }
 
 class SignInState {
   final SignInData data;
   final bool obscurePassword;
-  final AsyncValue<AuthUser> authState;
+  final AsyncValue<AuthUser?> authState;
   final String? loginIdError;
   final String? passwordError;
 
   const SignInState({
     this.data = const SignInData(),
     this.obscurePassword = true,
-    this.authState = const AsyncValue.data(AuthUser(id: 0)),
+    this.authState = const AsyncValue.data(null),
     this.loginIdError,
     this.passwordError,
   });
 
-  bool get hasValidationErrors =>
-      loginIdError != null || passwordError != null;
-
   SignInState copyWith({
     SignInData? data,
     bool? obscurePassword,
-    AsyncValue<AuthUser>? authState,
+    AsyncValue<AuthUser?>? authState,
     String? loginIdError,
     String? passwordError,
   }) {

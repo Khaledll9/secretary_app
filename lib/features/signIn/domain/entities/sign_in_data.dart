@@ -14,16 +14,16 @@ class SignInData {
 
 class AuthUser {
   final int id;
-  final String? nameAr;
-  final String? nameEn;
-  final String? email;
-  final String? type;
+  final String name;
+  final List<String> roles;
+  final int? instituteId;
+  final String token;
 
   const AuthUser({
     required this.id,
-    this.nameAr,
-    this.nameEn,
-    this.email,
-    this.type,
+    required this.name,
+    required this.token,
+    this.roles = const [],
+    this.instituteId,
   });
 }

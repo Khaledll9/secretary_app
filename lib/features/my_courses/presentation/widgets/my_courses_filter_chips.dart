@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/text_styles.dart';
-import '../../../../core/theme/theme.dart';
 import '../providers/my_courses_provider.dart';
 
 class MyCoursesFilterChips extends StatelessWidget {

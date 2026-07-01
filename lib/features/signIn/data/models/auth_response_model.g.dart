@@ -35,24 +35,25 @@ AuthDataModel _$AuthDataModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AuthDataModelToJson(AuthDataModel instance) =>
     <String, dynamic>{'token': instance.token, 'user': instance.user};
 
+RoleModel _$RoleModelFromJson(Map<String, dynamic> json) =>
+    RoleModel(name: json['name'] as String);
+
+Map<String, dynamic> _$RoleModelToJson(RoleModel instance) => <String, dynamic>{
+  'name': instance.name,
+};
+
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
   id: (json['id'] as num).toInt(),
-  nameAr: json['name_ar'] as String?,
-  nameEn: json['name_en'] as String?,
-  fullNameAr: json['full_name_ar'] as String?,
-  fullNameEn: json['full_name_en'] as String?,
-  email: json['email'] as String?,
-  type: json['type'] as String?,
-  phone: json['phone'] as String?,
+  name: json['name'] as String,
+  roles: (json['roles'] as List<dynamic>?)
+      ?.map((e) => RoleModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  instituteId: (json['institute_id'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
   'id': instance.id,
-  'name_ar': instance.nameAr,
-  'name_en': instance.nameEn,
-  'full_name_ar': instance.fullNameAr,
-  'full_name_en': instance.fullNameEn,
-  'email': instance.email,
-  'type': instance.type,
-  'phone': instance.phone,
+  'name': instance.name,
+  'roles': instance.roles,
+  'institute_id': instance.instituteId,
 };
