@@ -87,8 +87,10 @@ class CoursesReportsScreen extends ConsumerWidget {
                     item: StatItem(
                       label: 'الدبلومات',
                       value: '${data.diplomaCount}',
-                      iconBgColor: Theme.of(context).colorScheme.secondaryFixed,
-                      iconColor: Theme.of(context).colorScheme.onSecondaryFixed,
+                      iconBgColor: Theme.of(
+                        context,
+                      ).colorScheme.onSecondaryFixed,
+                      iconColor: Theme.of(context).colorScheme.secondaryFixed,
                       iconType: IconType.diploma,
                     ),
                   ),

@@ -7,21 +7,28 @@ import '../../../../core/theme/text_styles.dart';
 import '../providers/reports_provider.dart';
 import '../widgets/activity_log_section.dart';
 import '../widgets/course_stats_section.dart';
-import '../widgets/filter_section.dart';
+import '../widgets/courses_reports/courses_filter_section.dart';
 import '../widgets/stat_grid.dart';
 
-class ReportsScreen extends ConsumerWidget {
+class ReportsScreen extends ConsumerStatefulWidget {
   final ScrollController? scrollController;
 
   const ReportsScreen({super.key, this.scrollController});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ReportsScreen> createState() => _ReportsScreenState();
+}
+
+class _ReportsScreenState extends ConsumerState<ReportsScreen> {
+  String _selectedCategory = '';
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(reportsProvider);
 
     return state.content.when(
       data: (data) => SingleChildScrollView(
-        controller: scrollController,
+        controller: widget.scrollController,
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,13 +38,30 @@ class ReportsScreen extends ConsumerWidget {
               items: data.adStats,
               onViewAll: () => context.pushNamed(AppRoutes.bookingReport),
             ),
+            const SizedBox(height: 8),
             CourseStatsSection(
               title: 'تقارير الدورات',
               items: data.courseStats,
               onViewAll: () => context.pushNamed(AppRoutes.coursesReports),
             ),
             const SizedBox(height: 16),
-            const FilterSection(),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                ),
+              ),
+              child: CoursesFilterSection(
+                selectedCategory: _selectedCategory,
+                totalCourses: '${data.courseStats.length}',
+                onCategoryChanged: (v) {
+                  if (v != null) setState(() => _selectedCategory = v);
+                },
+              ),
+            ),
             const SizedBox(height: 16),
             ActivityLogSection(
               title: 'سجل الأنشطة الأخيرة',

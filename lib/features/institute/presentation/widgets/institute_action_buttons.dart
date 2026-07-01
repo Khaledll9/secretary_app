@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/text_styles.dart';
 
 class InstituteActionButtons extends StatelessWidget {
-
-  const InstituteActionButtons({
-    super.key,
-  });
+  const InstituteActionButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class InstituteActionButtons extends StatelessWidget {
             label: 'اتصل الآن',
             icon: Icons.phone_outlined,
             bgColor: Theme.of(context).colorScheme.primary,
-            textColor: Theme.of(context).colorScheme.surface,
+            textColor: Theme.of(context).colorScheme.onPrimary,
             onPressed: () {},
           ),
           const SizedBox(height: 12),
@@ -78,7 +75,9 @@ class _InstituteButtons extends StatelessWidget {
           disabledBackgroundColor: bgColor,
           disabledForegroundColor: textColor,
           elevation: 0,
-          side: borderColor != null ? BorderSide(color: borderColor!) : BorderSide.none,
+          side: borderColor != null
+              ? BorderSide(color: borderColor!)
+              : BorderSide.none,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -89,10 +88,7 @@ class _InstituteButtons extends StatelessWidget {
           children: [
             Icon(icon, size: 20, color: textColor),
             const SizedBox(width: 8),
-            Text(
-              label,
-              style: AppTextStyles.bold16.copyWith(color: textColor),
-            ),
+            Text(label, style: AppTextStyles.bold16.copyWith(color: textColor)),
           ],
         ),
       ),

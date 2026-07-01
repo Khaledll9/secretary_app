@@ -47,7 +47,9 @@ class _PublishButton extends StatelessWidget {
       ),
       child: Text(
         'نشر الآن',
-        style: AppTextStyles.bold12.copyWith(color: Theme.of(context).colorScheme.surface),
+        style: AppTextStyles.bold12.copyWith(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
       ),
     );
   }

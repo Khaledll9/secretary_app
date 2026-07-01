@@ -21,11 +21,12 @@ class InstituteCoverSection extends StatelessWidget {
           width: double.infinity,
           height: 256,
           decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainer,
+            image: DecorationImage(
+              image: AssetImage('assets/images/institute.jpg'),
+              fit: BoxFit.cover,
+            ),
+            color: Theme.of(context).colorScheme.surfaceContainer,
             borderRadius: BorderRadius.circular(32),
-          ),
-          child: Center(
-            child: Icon(Icons.image, size: 64, color: Theme.of(context).colorScheme.outline),
           ),
         ),
         Positioned(
@@ -44,16 +45,16 @@ class InstituteCoverSection extends StatelessWidget {
                 padding: const EdgeInsets.all(4),
                 child: Container(
                   decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainer,
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(32),
                   ),
-                    child: Center(
-                      child: Icon(
-                        Icons.school,
-                        size: 48,
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
+                  child: Center(
+                    child: Image(
+                      image: Theme.of(context).brightness == Brightness.light
+                          ? AssetImage('assets/images/app_icon_black.png')
+                          : AssetImage('assets/images/app_icon_white.png'),
                     ),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -61,14 +62,16 @@ class InstituteCoverSection extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: AppTextStyles.bold24.copyWith(fontWeight: FontWeight.w900),
+                    style: AppTextStyles.bold24.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Icon(
+                      Icon(
                         Icons.location_on_outlined,
                         size: 20,
                         color: Theme.of(context).colorScheme.outline,

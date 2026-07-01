@@ -21,12 +21,15 @@ class _AddMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
     return Container(
       width: 40,
       height: 40,
       margin: EdgeInsets.only(left: 16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: isLight
+            ? Theme.of(context).colorScheme.onPrimary
+            : Theme.of(context).colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -36,7 +39,7 @@ class _AddMenuButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         icon: Icon(
           Icons.add_circle_outline,
-          color: Theme.of(context).colorScheme.surface,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 4,
@@ -273,6 +276,7 @@ class _NotificationBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Stack(
@@ -281,7 +285,9 @@ class _NotificationBadge extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: isLight
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: Theme.of(context).colorScheme.surfaceContainerHighest,

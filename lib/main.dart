@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart' show DevicePreview;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,10 +8,10 @@ import 'core/utils/app_routes.dart';
 import 'generated/l10n.dart' show S;
 
 void main() {
-  runApp(
-    ProviderScope(child: DevicePreview(builder: (context) => const MyApp())),
-  );
-  // runApp(ProviderScope(child: const MyApp()));
+  // runApp(
+  //   ProviderScope(child: DevicePreview(builder: (context) => const MyApp())),
+  // );
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends ConsumerWidget {

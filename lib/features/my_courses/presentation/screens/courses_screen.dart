@@ -34,7 +34,7 @@ class CoursesScreen extends ConsumerWidget {
             );
           }
           return ListView.separated(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+            padding: const EdgeInsets.all(16),
             itemCount: courses.length,
             separatorBuilder: (_, _) => const SizedBox(height: 16),
             itemBuilder: (context, index) {
@@ -48,20 +48,19 @@ class CoursesScreen extends ConsumerWidget {
                     color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.edit_outlined,
                         size: 20,
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                       const SizedBox(width: 4.0),
                       Text(
                         'تعديل',
-                        style: AppTextStyles.medium14.copyWith(
-                          color: Theme.of(context).colorScheme.surface,
+                        style: AppTextStyles.bold14.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
                     ],
@@ -70,7 +69,7 @@ class CoursesScreen extends ConsumerWidget {
                 secondButton: Container(
                   height: 48,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
